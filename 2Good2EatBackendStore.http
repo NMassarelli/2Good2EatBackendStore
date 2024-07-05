@@ -1,0 +1,6 @@
+@_2Good2EatBackendStore_HostAddress = http://localhost:5174
+
+GET {{_2Good2EatBackendStore_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
