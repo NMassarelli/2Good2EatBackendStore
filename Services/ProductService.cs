@@ -1,4 +1,5 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
+using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatStore.Data.Enums;
 using _2Good2EatStore.Data.Interfaces;
 
@@ -23,7 +24,7 @@ namespace _2Good2EatStore.Data.Services
             return _dbContext.Products.FirstOrDefault(x => x.Id == id);
         }
 
-        public IQueryable<Product> GetProducts()
+        public IQueryable<Product> GetAllProducts()
         {
             return _dbContext.Products.AsQueryable();
         }
@@ -44,11 +45,11 @@ namespace _2Good2EatStore.Data.Services
             _dbContext.SaveChanges();
         }
 
-        public IQueryable<Product> GetProductsByType(ProductTypeEnum type){
-
-            return _dbContext.Products.Where(x => x.ProductType == type);
-
+        public IQueryable<Product> GetFilteredProducts(ProductSearchModel searchOptions)
+        {
+            return GetAllProducts().Where(x => x.IsVisible == searchOptions.IfVisible
+                                                   && x.IsDeleted == searchOptions.IfDeleted
+                                                   && searchOptions.ProductTypes.Contains(x.ProductType));
         }
-
     }
 }

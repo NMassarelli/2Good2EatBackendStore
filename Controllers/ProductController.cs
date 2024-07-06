@@ -15,9 +15,9 @@ namespace _2Good2EatBackendStore.Controllers
 
         // GET: api/<ProductController>
         [HttpGet]
-        public IEnumerable<ProductModel> Get()
+        public IEnumerable<ProductModel> Get([FromBody] ProductSearchModel searchTerms)
         {
-            return _productService.GetProducts().ToList().MapToModelList();
+            return _productService.GetFilteredProducts(searchTerms).ToList().MapToModelList();
         }
 
         // GET api/<ProductController>/5

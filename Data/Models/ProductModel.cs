@@ -21,7 +21,6 @@ namespace _2Good2EatBackendStore.Data.Models
         public int Inventory { get; set; }
         public bool IsVisible { get; set; }
         public bool IsDeleted { get; set; }
-        public IBrowserFile? file { get; set; }
 
     }
 
