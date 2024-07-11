@@ -10,14 +10,14 @@ namespace _2Good2EatBackendStore.Data.Models
     public class ProductModel
     {
 
-        public int Id { get; internal set; }
+        public string? Id { get; internal set; }
 
-        public string? Name { get; set; }
-        public string? Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public ProductTypeEnum ProductType { get; set; }
-        public string? ProductImageURL { get; set; }
-        public decimal WholesalePrice { get; set; }
-        public decimal RetailPrice { get; set; }
+        public string ProductImageURL { get; set; }
+        public string WholesalePrice { get; set; }
+        public string RetailPrice { get; set; }
         public int Inventory { get; set; }
         public bool IsVisible { get; set; }
         public bool IsDeleted { get; set; }
@@ -40,14 +40,14 @@ namespace _2Good2EatBackendStore.Data.Models
         {
             return new Product
             {
-                Id = model.Id,
+                Id = model.Id == null ? null : int.Parse(model.Id),
                 Name = model.Name,
                 Description = model.Description,
                 ProductType = model.ProductType,
                 ProductImageURL = model.ProductImageURL,
                 Inventory = model.Inventory,
-                RetailPrice = model.RetailPrice,
-                WholesalePrice = model.WholesalePrice,
+                RetailPrice = decimal.Parse(model.RetailPrice),
+                WholesalePrice = decimal.Parse(model.WholesalePrice),
                 IsDeleted = model.IsDeleted,
                 IsVisible = model.IsVisible,
 
@@ -58,14 +58,14 @@ namespace _2Good2EatBackendStore.Data.Models
         {
             return new ProductModel
             {
-                Id = entity.Id,
+                Id = entity.Id.ToString(),
                 Name = entity.Name,
                 Description = entity.Description,
                 ProductType = entity.ProductType,
                 ProductImageURL = entity.ProductImageURL,
                 Inventory = entity.Inventory,
-                RetailPrice = entity.RetailPrice,
-                WholesalePrice = entity.WholesalePrice,
+                RetailPrice = entity.RetailPrice.ToString(),
+                WholesalePrice = entity.WholesalePrice.ToString(),
                 IsDeleted = entity.IsDeleted,
                 IsVisible = entity.IsVisible,
 
@@ -92,13 +92,6 @@ namespace _2Good2EatBackendStore.Data.Models
             RuleFor(x => x.WholesalePrice)
                 .LessThan(x => x.RetailPrice).WithMessage("Wholesale price should be lower than retail price wtf?");
 
-
-            RuleSet("HasFile", () =>
-            {
-                RuleFor(x => x.file).NotNull().WithMessage("Friendo please upload a file")
-                    .ChildRules(file => file.RuleFor(x => x.Size).LessThan(5000000).WithMessage("Friendo please upload a file less than 5mb"));
-
-            });
 
 
         }

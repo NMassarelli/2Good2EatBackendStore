@@ -14,8 +14,8 @@ namespace _2Good2EatBackendStore.Controllers
         private readonly IProductService _productService = productService;
 
         // GET: api/<ProductController>
-        [HttpGet]
-        public IEnumerable<ProductModel> Get([FromBody] ProductSearchModel searchTerms)
+        [HttpPost("GetFilteredProducts")]
+        public IEnumerable<ProductModel> GetFilteredProducts([FromBody] ProductSearchModel searchTerms)
         {
             return _productService.GetFilteredProducts(searchTerms).ToList().MapToModelList();
         }
@@ -28,7 +28,7 @@ namespace _2Good2EatBackendStore.Controllers
         }
 
         // POST api/<ProductController>
-        [HttpPost]
+        [HttpPost("Save")]
         public void Post([FromBody] ProductModel value)
         {
             _productService.SaveProduct(value.MapToEntity());
