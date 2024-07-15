@@ -1,9 +1,11 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatStore.Data.Enums;
+using _2Good2EatBackendStore.Services;
+using _2Good2EatStore.Data;
 using _2Good2EatStore.Data.Interfaces;
 
-namespace _2Good2EatStore.Data.Services
+
+namespace _2Good2EatStore.Services
 {
     public class ProductService(ApplicationDbContext context) : IProductService
     {
@@ -47,9 +49,26 @@ namespace _2Good2EatStore.Data.Services
 
         public IQueryable<Product> GetFilteredProducts(ProductSearchModel searchOptions)
         {
-            return GetAllProducts().Where(x => x.IsVisible == searchOptions.IfVisible
-                                                   && x.IsDeleted == searchOptions.IfDeleted
-                                                   && searchOptions.ProductTypes.Contains(x.ProductType));
+            var predicate = PredicateBuilderService.False<Product>();
+            if (!searchOptions.showInvisible)
+            {
+                predicate = predicate.And(x => x.IsVisible);
+            }
+
+            if (!searchOptions.showDeleted)
+            {
+                predicate = predicate.And(x => !x.IsDeleted);
+            }
+
+            if(searchOptions.ProductTypes.Count > 0)
+            {
+                foreach(var type in searchOptions.ProductTypes)
+                {
+                    predicate = predicate.Or(x => x.ProductType == type);
+                }
+               
+            }
+            return GetAllProducts().Where(predicate);
         }
     }
 }

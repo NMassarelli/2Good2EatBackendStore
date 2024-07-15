@@ -10,14 +10,14 @@ namespace _2Good2EatBackendStore.Data.Models
     public class ProductModel
     {
 
-        public string? Id { get; internal set; }
+        public string? Id { get;  set; }
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public ProductTypeEnum ProductType { get; set; }
+        public int ProductType { get; set; }
         public string ProductImageURL { get; set; }
-        public string WholesalePrice { get; set; }
-        public string RetailPrice { get; set; }
+        public decimal WholesalePrice { get; set; }
+        public decimal RetailPrice { get; set; }
         public int Inventory { get; set; }
         public bool IsVisible { get; set; }
         public bool IsDeleted { get; set; }
@@ -40,14 +40,14 @@ namespace _2Good2EatBackendStore.Data.Models
         {
             return new Product
             {
-                Id = model.Id == null ? null : int.Parse(model.Id),
+                Id = string.IsNullOrEmpty(model.Id) ? null : int.Parse(model.Id),
                 Name = model.Name,
                 Description = model.Description,
-                ProductType = model.ProductType,
+                ProductType = (ProductTypeEnum)Enum.ToObject(typeof(ProductTypeEnum), model.ProductType),
                 ProductImageURL = model.ProductImageURL,
                 Inventory = model.Inventory,
-                RetailPrice = decimal.Parse(model.RetailPrice),
-                WholesalePrice = decimal.Parse(model.WholesalePrice),
+                RetailPrice = model.RetailPrice,
+                WholesalePrice = model.WholesalePrice,
                 IsDeleted = model.IsDeleted,
                 IsVisible = model.IsVisible,
 
@@ -61,11 +61,11 @@ namespace _2Good2EatBackendStore.Data.Models
                 Id = entity.Id.ToString(),
                 Name = entity.Name,
                 Description = entity.Description,
-                ProductType = entity.ProductType,
+                ProductType = (int)entity.ProductType,
                 ProductImageURL = entity.ProductImageURL,
                 Inventory = entity.Inventory,
-                RetailPrice = entity.RetailPrice.ToString(),
-                WholesalePrice = entity.WholesalePrice.ToString(),
+                RetailPrice = entity.RetailPrice,
+                WholesalePrice = entity.WholesalePrice,
                 IsDeleted = entity.IsDeleted,
                 IsVisible = entity.IsVisible,
 

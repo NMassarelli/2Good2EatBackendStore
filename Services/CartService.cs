@@ -1,7 +1,7 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatStore.Data.Interfaces;
 
-namespace _2Good2EatStore.Data.Services
+namespace _2Good2EatStore.Services
 {
     public class CartService(IProductService productService) : ICartService
     {
