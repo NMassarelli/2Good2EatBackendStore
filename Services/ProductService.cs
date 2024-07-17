@@ -1,6 +1,7 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatStore.Data;
+using _2Good2EatStore.Data.Enums;
 using _2Good2EatStore.Data.Interfaces;
 
 
@@ -50,6 +51,7 @@ namespace _2Good2EatStore.Services
         {
 
             var finalList = GetAllProducts();
+
             if (!searchOptions.ShowInvisible)
             {
                 finalList = finalList.Where(x => x.IsVisible);
@@ -60,13 +62,22 @@ namespace _2Good2EatStore.Services
                 finalList = finalList.Where(x => !x.IsDeleted);
             }
 
-            if(searchOptions.ProductTypes.Count > 0)
+            if (!searchOptions.ShowOutOfStock)
             {
-                foreach(var type in searchOptions.ProductTypes)
+                finalList = finalList.Where(x => x.Inventory > 0);
+            }
+
+            if (searchOptions.ProductTypes.Count > 0)
+            {
+                foreach (var type in searchOptions.ProductTypes)
                 {
                     finalList = finalList.Where(x => searchOptions.ProductTypes.Contains(x.ProductType));
                 }
-               
+
+            }
+            else
+            {
+                finalList = finalList.Where(x => x.ProductType == ProductTypeEnum.None);
             }
 
             return finalList;
