@@ -3,7 +3,6 @@ using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatStore.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace _2Good2EatBackendStore.Controllers
 {
@@ -15,8 +14,9 @@ namespace _2Good2EatBackendStore.Controllers
 
         // GET: api/<ProductController>
         [HttpPost("GetFilteredProducts")]
-        public IEnumerable<ProductModel> GetFilteredProducts([FromBody] ProductSearchModel searchTerms)
+        public IEnumerable<ProductModel> GetFilteredProducts([FromBody] ProductSearchModel? searchTerms)
         {
+            searchTerms ??= new ProductSearchModel();
             return _productService.GetFilteredProducts(searchTerms).ToList().MapToModelList();
         }
 

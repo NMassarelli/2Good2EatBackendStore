@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using System.Reflection.Metadata;
 
-namespace _2Good2EatStore.Data.Services
+namespace _2Good2EatStore.Services
 {
     public class FileService(IWebHostEnvironment webHostEnvironment) : IFileService
     {

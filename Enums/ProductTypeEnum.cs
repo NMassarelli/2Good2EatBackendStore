@@ -8,6 +8,6 @@ namespace _2Good2EatStore.Data.Enums
          [Display(Name = "None")] None = 0
 		,[Display(Name = "Candle")] Candle = 1
 		,[Display(Name = "Wax Melt")] WaxMelt = 2
-        ,[Display(Name = "Crochet Plushie")] CrochetPlushie = 3
+        ,[Display(Name = "Crochet Item")] CrochetItem = 3
 	}
 }
