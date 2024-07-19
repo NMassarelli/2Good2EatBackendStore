@@ -1,7 +1,7 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
 
-namespace _2Good2EatStore.Data.Interfaces
+namespace _2Good2EatStore.Interfaces
 {
     public interface IProductService 
     {

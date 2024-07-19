@@ -1,6 +1,6 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatStore.Data.Interfaces;
+using _2Good2EatStore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 

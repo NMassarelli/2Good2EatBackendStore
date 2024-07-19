@@ -1,6 +1,8 @@
 using _2Good2EatBackendStore.Data.Models;
+using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Services;
 using _2Good2EatStore.Data;
-using _2Good2EatStore.Data.Interfaces;
+using _2Good2EatStore.Interfaces;
 using _2Good2EatStore.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,12 +12,14 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
-
+builder.Services.AddScoped<IAuthenticationHelperService, AuthenticationHelperService>();
 builder.Services.AddControllers();
 
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<ProductModelFluentValidator>();
 
@@ -29,6 +33,7 @@ var connectionString = builder.Configuration.GetConnectionString("DBConnectionSt
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString)
     );
+
 
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly());
 
@@ -52,7 +57,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 app.UseCors(MyAllowSpecificOrigins);
 
