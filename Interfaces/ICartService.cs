@@ -1,4 +1,4 @@
-﻿namespace _2Good2EatStore.Interfaces
+﻿namespace _2Good2EatBackendStore.Interfaces
 {
     public interface ICartService
     {

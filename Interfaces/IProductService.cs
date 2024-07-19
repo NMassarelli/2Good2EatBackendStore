@@ -1,9 +1,9 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
 
-namespace _2Good2EatStore.Interfaces
+namespace _2Good2EatBackendStore.Interfaces
 {
-    public interface IProductService 
+    public interface IProductService
     {
         IQueryable<Product> GetAllProducts();
         IQueryable<Product> GetFilteredProducts(ProductSearchModel searchOptions);

@@ -1,4 +1,4 @@
-﻿using _2Good2EatStore.Data.Enums;
+﻿using _2Good2EatBackendStore.Enums;
 
 namespace _2Good2EatBackendStore.Data.Models
 {

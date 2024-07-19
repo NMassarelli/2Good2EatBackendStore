@@ -1,11 +1,10 @@
-﻿using _2Good2EatBackendStore.Data.Entities;
+﻿using _2Good2EatBackendStore.Data;
+using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatStore.Data;
-using _2Good2EatStore.Data.Enums;
-using _2Good2EatStore.Interfaces;
+using _2Good2EatBackendStore.Enums;
+using _2Good2EatBackendStore.Interfaces;
 
-
-namespace _2Good2EatStore.Services
+namespace _2Good2EatBackendStore.Services
 {
     public class ProductService(ApplicationDbContext context) : IProductService
     {
@@ -36,10 +35,10 @@ namespace _2Good2EatStore.Services
             var trackedReference = _dbContext.Products.Local.SingleOrDefault(p => p.Id == product.Id);
 
             if (trackedReference == null)
-            { 
+            {
                 _dbContext.Products.Update(product);
             }
-            else if (!Object.ReferenceEquals(trackedReference, product))
+            else if (!ReferenceEquals(trackedReference, product))
             {
                 _dbContext.Entry(trackedReference).CurrentValues.SetValues(product);
             }

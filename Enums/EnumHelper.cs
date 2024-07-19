@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace _2Good2EatStore.Data.Enums
+namespace _2Good2EatBackendStore.Enums
 {
     public static class EnumHelper<T> where T : struct, Enum
     {
@@ -56,7 +56,7 @@ namespace _2Good2EatStore.Data.Enums
                 return lookupResource(descriptionAttributes[0].ResourceType, descriptionAttributes[0].Name);
 
             if (descriptionAttributes == null) return string.Empty;
-            return (descriptionAttributes.Length > 0) ? descriptionAttributes[0].Name : value.ToString();
+            return descriptionAttributes.Length > 0 ? descriptionAttributes[0].Name : value.ToString();
         }
 
 

@@ -1,7 +1,7 @@
-﻿using _2Good2EatBackendStore.Data.Entities;
+﻿using _2Good2EatBackendStore.Data;
+using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatBackendStore.Interfaces;
-using _2Good2EatStore.Data;
 using _2Good2EatStore.Data.Enums;
 using _2Good2EatStore.Interfaces;
 namespace _2Good2EatBackendStore.Services

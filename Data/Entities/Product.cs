@@ -1,4 +1,4 @@
-﻿using _2Good2EatStore.Data.Enums;
+﻿using _2Good2EatBackendStore.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
