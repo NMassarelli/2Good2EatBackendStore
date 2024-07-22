@@ -1,9 +1,6 @@
-﻿using _2Good2EatStore.Data.Enums;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using FluentValidation;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using FluentValidation;
 using _2Good2EatBackendStore.Data.Entities;
+using _2Good2EatBackendStore.Enums;
 
 namespace _2Good2EatBackendStore.Models
 {
