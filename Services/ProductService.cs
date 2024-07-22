@@ -1,8 +1,8 @@
 ﻿using _2Good2EatBackendStore.Data;
 using _2Good2EatBackendStore.Data.Entities;
-using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatBackendStore.Enums;
 using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 
 namespace _2Good2EatBackendStore.Services
 {
