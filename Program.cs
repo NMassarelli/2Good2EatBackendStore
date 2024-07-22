@@ -1,8 +1,7 @@
 using _2Good2EatBackendStore.Data;
-using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 using _2Good2EatBackendStore.Services;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

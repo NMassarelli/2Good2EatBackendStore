@@ -1,5 +1,5 @@
-﻿using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatBackendStore.Interfaces;
+﻿using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -34,7 +34,7 @@ namespace _2Good2EatBackendStore.Controllers
 
 
         [HttpPost("register")]
-        public bool Register(ApplicationUserModel model)
+        public bool Register(RegistrationRequest model)
         {
             return _userService.RegisterUser(model);
         }

@@ -1,9 +1,7 @@
 ﻿using _2Good2EatBackendStore.Data;
 using _2Good2EatBackendStore.Data.Entities;
-using _2Good2EatBackendStore.Data.Models;
 using _2Good2EatBackendStore.Interfaces;
-using _2Good2EatStore.Data.Enums;
-using _2Good2EatStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 namespace _2Good2EatBackendStore.Services
 
 {
@@ -26,7 +24,11 @@ namespace _2Good2EatBackendStore.Services
             return _dbContext.Users.FirstOrDefault(x => x.Id == id);
         }
 
-        public bool RegisterUser(ApplicationUserModel newUser)
+        private ApplicationUser GetUserByEmail(string email)
+        {
+            return _dbContext.Users.FirstOrDefault(x => x.Email == email);
+        }
+        public bool RegisterUser(RegistrationRequest newUser)
         {
             ApplicationUser user = new()
             {
@@ -57,5 +59,16 @@ namespace _2Good2EatBackendStore.Services
 
             _dbContext.SaveChanges();
         }
+
+
+        public LoginResponse Login(LoginRequest request)
+        {
+
+            return new LoginResponse
+            {
+
+            }
+        }
+
     }
 }

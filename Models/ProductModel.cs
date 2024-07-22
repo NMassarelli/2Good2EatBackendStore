@@ -1,16 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _2Good2EatStore.Data.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Microsoft.AspNetCore.Components.Forms;
 using _2Good2EatBackendStore.Data.Entities;
-using _2Good2EatBackendStore.Enums;
 
-namespace _2Good2EatBackendStore.Data.Models
+namespace _2Good2EatBackendStore.Models
 {
     public class ProductModel
     {
 
-        public string? Id { get;  set; }
+        public string? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int ProductType { get; set; }

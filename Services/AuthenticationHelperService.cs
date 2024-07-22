@@ -1,6 +1,5 @@
-﻿using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatBackendStore.Interfaces;
-using _2Good2EatStore.Interfaces;
+﻿using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -36,9 +35,11 @@ namespace _2Good2EatBackendStore.Services
             return Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password)));
         }
 
-        public bool ComparePassword(string password, string hash)
+        private bool ComparePassword(string password, string hash)
         {
             return Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password))).Equals(hash);
         }
+
+    
     }
 }

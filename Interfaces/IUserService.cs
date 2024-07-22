@@ -1,5 +1,5 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
-using _2Good2EatBackendStore.Data.Models;
+using _2Good2EatBackendStore.Models;
 
 namespace _2Good2EatBackendStore.Interfaces
 {
@@ -8,7 +8,6 @@ namespace _2Good2EatBackendStore.Interfaces
         ApplicationUser  GetUserById(string id);
         void SaveUser(ApplicationUser user);
         void DeleteUser(string id);
-
-        bool RegisterUser(ApplicationUserModel newUser);
+        bool RegisterUser(RegistrationRequest newUser);
     }
 }

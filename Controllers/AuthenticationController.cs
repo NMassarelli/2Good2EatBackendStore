@@ -1,7 +1,5 @@
-﻿using _2Good2EatBackendStore.Data.Models;
-using _2Good2EatBackendStore.Interfaces;
-using _2Good2EatStore.Interfaces;
-using _2Good2EatStore.Services;
+﻿using _2Good2EatBackendStore.Interfaces;
+using _2Good2EatBackendStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -16,15 +14,24 @@ namespace _2Good2EatBackendStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController(IAuthenticationHelperService authenticationHelperService) : ControllerBase
+    public class AuthenticationController(IAuthenticationHelperService authenticationHelperService, 
+        IUserService userService) : ControllerBase
     {
 
         private readonly IAuthenticationHelperService _authenticationHelperService = authenticationHelperService;
+        private readonly IUserService _userService = userService;
         
         [HttpPost("/GenerateKeyForImagekit")]
         public string GenerateKeyForImagekit()
         {
             return JsonSerializer.Serialize(_authenticationHelperService.ProcessImagekitAuthenticationToken);
         }
+
+        [HttpPost("/Login")]
+        public string Login([FromBody] LoginRequest auth)
+        {
+
+        }
+
     }
 }

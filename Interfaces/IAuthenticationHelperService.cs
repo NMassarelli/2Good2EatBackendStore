@@ -1,10 +1,11 @@
-﻿using _2Good2EatBackendStore.Data.Models;
+﻿using _2Good2EatBackendStore.Models;
 
 namespace _2Good2EatBackendStore.Interfaces
 {
     public interface IAuthenticationHelperService
     {
-        public ImagekitAuthModel ProcessImagekitAuthenticationToken();
+        ImagekitAuthModel ProcessImagekitAuthenticationToken();
         string HashPassword(string password);
+
     }
 }

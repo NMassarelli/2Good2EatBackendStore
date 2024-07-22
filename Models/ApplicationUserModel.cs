@@ -1,17 +1,15 @@
 ﻿using _2Good2EatBackendStore.Data.Entities;
 
-namespace _2Good2EatBackendStore.Data.Models
+namespace _2Good2EatBackendStore.Models
 {
     public class ApplicationUserModel
-    {   
+    {
         public string Id { get; set; }
         public string Email { get; set; }
-        public string PasswordHash { get; set; }
-        public bool EmailConfirmed {  get; set; }
-        public string FirstName   { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Password { get; set; }
-   
+
     }
 
 
@@ -21,9 +19,8 @@ namespace _2Good2EatBackendStore.Data.Models
         {
             return new ApplicationUserModel
             {
-                Id  = entity.Id,
+                Id = entity.Id,
                 Email = entity.Email,
-                PasswordHash = entity.PasswordHash,
                 EmailConfirmed = entity.EmailConfirmed,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
@@ -37,7 +34,6 @@ namespace _2Good2EatBackendStore.Data.Models
             {
                 Id = model.Id,
                 Email = model.Email,
-                PasswordHash = model.PasswordHash,
                 EmailConfirmed = model.EmailConfirmed,
                 FirstName = model.FirstName,
                 LastName = model.LastName,

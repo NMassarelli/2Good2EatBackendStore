@@ -1,6 +1,6 @@
 ﻿using _2Good2EatBackendStore.Enums;
 
-namespace _2Good2EatBackendStore.Data.Models
+namespace _2Good2EatBackendStore.Models
 {
     public class ProductSearchModel
     {
