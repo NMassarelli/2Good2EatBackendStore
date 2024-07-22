@@ -36,7 +36,7 @@ namespace _2Good2EatBackendStore.Services
                 LastName = newUser.LastName,
                 Email = newUser.Email,
                 EmailConfirmed = false,
-                PasswordHash = _authenticationHelperService.HashPassword(newUser.Password),
+                PasswordHash = _authenticationHelperService.HashPassword(newUser.Password,newUser.Email),
                 
             };
 
@@ -63,11 +63,27 @@ namespace _2Good2EatBackendStore.Services
 
         public LoginResponse Login(LoginRequest request)
         {
+            var user = GetUserByEmail(request.Email);
+            var compare = _authenticationHelperService.ComparePassword(request.Password, request.Email, user.PasswordHash);
 
-            return new LoginResponse
+            if (compare)
             {
+                return new LoginResponse
+                {
+                    User = user.MapToModel(),
 
+
+                };
             }
+            else
+            {
+                return new LoginResponse
+                {
+                   User = null
+
+                };
+            }
+           
         }
 
     }

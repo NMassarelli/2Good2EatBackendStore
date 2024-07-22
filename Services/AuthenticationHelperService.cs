@@ -30,16 +30,29 @@ namespace _2Good2EatBackendStore.Services
             };
         }
 
-        public string HashPassword(string password)
+        public string HashPassword(string password, string userName)
         {
-            return Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password)));
+            byte[] hashedSigniture;
+            using (HMACSHA256 hash = new(Encoding.UTF8.GetBytes(userName)))
+            {
+                MemoryStream stream = new(Encoding.UTF8.GetBytes(password));
+                hashedSigniture = hash.ComputeHash(stream);
+            }
+            return Convert.ToBase64String(hashedSigniture);
         }
 
-        private bool ComparePassword(string password, string hash)
+        public bool ComparePassword(string password, string userName, string hash)
         {
-            return Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(password))).Equals(hash);
+            byte[] hashedSigniture;
+            using (HMACSHA256 compareHash = new(Encoding.UTF8.GetBytes(userName)))
+            {
+                MemoryStream stream = new(Encoding.UTF8.GetBytes(password));
+                hashedSigniture = compareHash.ComputeHash(stream);
+            }
+
+            return hashedSigniture.ToString().Equals(hash);
         }
 
-    
+
     }
 }

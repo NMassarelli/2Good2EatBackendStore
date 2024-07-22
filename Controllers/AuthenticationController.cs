@@ -30,7 +30,7 @@ namespace _2Good2EatBackendStore.Controllers
         [HttpPost("/Login")]
         public string Login([FromBody] LoginRequest auth)
         {
-
+            return string.Empty;
         }
 
     }
