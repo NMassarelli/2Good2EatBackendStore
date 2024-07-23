@@ -1,11 +1,14 @@
 using _2Good2EatBackendStore.Data;
+using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Interfaces;
 using _2Good2EatBackendStore.Models;
 using _2Good2EatBackendStore.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +19,6 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IAuthenticationHelperService, AuthenticationHelperService>();
 builder.Services.AddControllers();
 
-builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
-
 builder.Services.AddScoped<ProductModelFluentValidator>();
 
 builder.Services.AddAuthentication(options =>
@@ -27,7 +27,16 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
 {
-
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration.GetSection("Keys:tokenIssuer").Value,
+        ValidAudience = builder.Configuration.GetSection("Keys:tokenAudiance").Value,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Keys:IssuerSecret").Value))
+    };
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,5 +1,6 @@
 ﻿using _2Good2EatBackendStore.Interfaces;
 using _2Good2EatBackendStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -13,6 +14,7 @@ namespace _2Good2EatBackendStore.Controllers
         private readonly IUserService _userService = userService;
         // GET api/<UserController>/5
         [HttpGet("{id}")]
+        [Authorize]
         public ApplicationUserModel Get(string id)
         {
             return _userService.GetUserById(id).MapToModel();
@@ -20,6 +22,7 @@ namespace _2Good2EatBackendStore.Controllers
 
         // POST api/<UserController>
         [HttpPost]
+        [Authorize]
         public void Post([FromBody] ApplicationUserModel value)
         {
 
@@ -28,6 +31,7 @@ namespace _2Good2EatBackendStore.Controllers
 
         // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
         }

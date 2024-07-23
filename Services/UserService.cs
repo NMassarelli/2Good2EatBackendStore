@@ -8,7 +8,7 @@ namespace _2Good2EatBackendStore.Services
     public class UserService(ApplicationDbContext context, IAuthenticationHelperService authenticationHelperService) : IUserService
     {
         private readonly ApplicationDbContext _dbContext = context;
-        private readonly IAuthenticationHelperService _authenticationHelperService;
+        private readonly IAuthenticationHelperService _authenticationHelperService = authenticationHelperService;
         public void DeleteUser(string id)
         {
             var user = _dbContext.Users.FirstOrDefault(x => x.Id == id);
@@ -80,7 +80,7 @@ namespace _2Good2EatBackendStore.Services
                 return new LoginResponse
                 {
                    User = null
-
+                  
                 };
             }
            

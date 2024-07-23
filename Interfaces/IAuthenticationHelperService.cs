@@ -1,4 +1,5 @@
 ﻿using _2Good2EatBackendStore.Models;
+using System.Security.Claims;
 
 namespace _2Good2EatBackendStore.Interfaces
 {
@@ -7,6 +8,6 @@ namespace _2Good2EatBackendStore.Interfaces
         ImagekitAuthModel ProcessImagekitAuthenticationToken();
         string HashPassword(string password, string userName);
         bool ComparePassword(string password, string userName, string hash);
-
+        string GenerateJwtToken(List<Claim> claims);
     }
 }

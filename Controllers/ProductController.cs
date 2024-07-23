@@ -1,5 +1,6 @@
 ﻿using _2Good2EatBackendStore.Interfaces;
 using _2Good2EatBackendStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -28,6 +29,7 @@ namespace _2Good2EatBackendStore.Controllers
 
         // POST api/<ProductController>
         [HttpPost("Save")]
+        [Authorize]
         public void Post([FromBody] ProductModel value)
         {
             _productService.SaveProduct(value.MapToEntity());
@@ -35,6 +37,7 @@ namespace _2Good2EatBackendStore.Controllers
 
         // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
             _productService.DeleteProduct(id);

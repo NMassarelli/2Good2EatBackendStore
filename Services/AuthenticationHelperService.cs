@@ -1,5 +1,8 @@
 ﻿using _2Good2EatBackendStore.Interfaces;
 using _2Good2EatBackendStore.Models;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -51,6 +54,21 @@ namespace _2Good2EatBackendStore.Services
             }
 
             return hashedSigniture.ToString().Equals(hash);
+        }
+
+        public string GenerateJwtToken(List<Claim> claims)
+        {
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Keys:IssuerSecret"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    
+            var token = new JwtSecurityToken(
+                issuer: config["Keys:tokenIssuer"],
+                audience: config["Keys:tokenAudiance"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(30),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
 
