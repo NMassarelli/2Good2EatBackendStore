@@ -30,10 +30,11 @@ namespace _2Good2EatBackendStore.Controllers
             return JsonSerializer.Serialize(_authenticationHelperService.ProcessImagekitAuthenticationToken);
         }
 
-        [HttpPost("/Login")]
+        [HttpPost("ProcessLogin")]
         public string Login([FromBody] LoginRequest auth)
         {
-            return string.Empty;
+            return _userService.ProcessLogin(auth);
+     
         }
 
     }

@@ -7,12 +7,6 @@
       
     }
 
-    public class LoginResponse
-    {
-       public ApplicationUserModel User { get; set; }
-       public string Token { get; set; }
-
-    }
 
     public class RegistrationRequest 
     { 

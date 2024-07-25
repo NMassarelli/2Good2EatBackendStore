@@ -2,6 +2,7 @@
 using _2Good2EatBackendStore.Data.Entities;
 using _2Good2EatBackendStore.Interfaces;
 using _2Good2EatBackendStore.Models;
+using System.Security.Claims;
 namespace _2Good2EatBackendStore.Services
 
 {
@@ -61,29 +62,31 @@ namespace _2Good2EatBackendStore.Services
         }
 
 
-        public LoginResponse Login(LoginRequest request)
+        public string ProcessLogin(LoginRequest request)
         {
             var user = GetUserByEmail(request.Email);
-            var compare = _authenticationHelperService.ComparePassword(request.Password, request.Email, user.PasswordHash);
+            List<Claim> claims = [];
+            if (user == null)
+            {
+                claims.Add(new Claim(ClaimTypes.AuthorizationDecision, "false"));
+                return _authenticationHelperService.GenerateJwtToken(claims);
+            }
 
+            var compare = _authenticationHelperService.ComparePassword(request.Password, request.Email, user.PasswordHash);
+ 
             if (compare)
             {
-                return new LoginResponse
-                {
-                    User = user.MapToModel(),
-
-
-                };
+                claims.Add(new Claim(ClaimTypes.AuthorizationDecision, "true"));
+                claims.Add(new Claim(ClaimTypes.Name, user.Email));
+                claims.Add(new Claim(ClaimTypes.Role, user.Role.ToString()));
             }
             else
             {
-                return new LoginResponse
-                {
-                   User = null
-                  
-                };
+                claims.Add(new Claim(ClaimTypes.AuthorizationDecision, "false"));
             }
-           
+
+            return _authenticationHelperService.GenerateJwtToken(claims);
+
         }
 
     }

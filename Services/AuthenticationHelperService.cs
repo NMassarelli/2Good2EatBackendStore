@@ -53,7 +53,7 @@ namespace _2Good2EatBackendStore.Services
                 hashedSigniture = compareHash.ComputeHash(stream);
             }
 
-            return hashedSigniture.ToString().Equals(hash);
+            return Convert.ToBase64String(hashedSigniture).Equals(hash);
         }
 
         public string GenerateJwtToken(List<Claim> claims)
@@ -65,7 +65,7 @@ namespace _2Good2EatBackendStore.Services
                 issuer: config["Keys:tokenIssuer"],
                 audience: config["Keys:tokenAudiance"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -37,7 +37,7 @@ namespace _2Good2EatBackendStore.Controllers
         }
 
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public bool Register(RegistrationRequest model)
         {
             return _userService.RegisterUser(model);
