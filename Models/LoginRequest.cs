@@ -7,6 +7,12 @@
       
     }
 
+    public class LoginResponse
+    {
+        public string Email { get; set; }
+        public string isAuthenticated { get; set; }
+        public int Role { get; set; }
+    }
 
     public class RegistrationRequest 
     { 
